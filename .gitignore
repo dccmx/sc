@@ -1,0 +1,10 @@
+debug/
+src/sc
+*.o
+.deps/
+*.log
+*.cache/
+*.status
+config.h
+Makefile
+stamp-h1
