@@ -21,12 +21,16 @@ ClientInitGenerator::~ClientInitGenerator() {}
 
 void ClientInitGenerator::Generate(io::Printer* printer) {
   printer->Print("from client import $package$\n", "package", PythonPackageName(file_->name()));
-  printer->Print("from $module$ import *\n", "module", PythonModuleName(file_->name()));
-  printer->Print("__all__ = ['$package$'", "package", PythonPackageName(file_->name()));
+  printer->Print("from $module$ import (", "module", PythonModuleName(file_->name()));
   for (int i = 0; i < file_->message_type_count(); ++i) {
-    printer->Print(",'$message$'", "message", file_->message_type(i)->name());
+    printer->Print("\n        $message$,", "message", file_->message_type(i)->name());
   }
-  printer->Print("]");
+  printer->Print("\n        )\n\n\n");
+  printer->Print("__all__ = [\n        '$package$',", "package", PythonPackageName(file_->name()));
+  for (int i = 0; i < file_->message_type_count(); ++i) {
+    printer->Print("\n        '$message$',", "message", file_->message_type(i)->name());
+  }
+  printer->Print("\n        ]\n");
 }
 
 }  // namespace sc

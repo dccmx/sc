@@ -50,7 +50,7 @@ void ImplementationGenerator::PrintServices() const {
           "        #   response = $module$.$response$()\n"
           "        #   do some thing to fill the response\n"
           "        #   done(response)\n"
-          "        pass";
+          "        pass\n";
       printer_->Print(m, method_tpl);
       if (j != service->method_count() - 1) printer_->Print("\n");
     }
