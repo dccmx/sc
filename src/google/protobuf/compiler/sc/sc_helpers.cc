@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "sc_helpers.h"
 
 string StripPath(const string& filename) {

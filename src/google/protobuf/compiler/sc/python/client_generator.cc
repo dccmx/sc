@@ -31,7 +31,7 @@ PythonClientGenerator::~PythonClientGenerator() {}
 
 bool PythonClientGenerator::Generate(const FileDescriptor* file,
                       const string& parameter,
-                      GeneratorContext* context,
+                      OutputDirectory* context,
                       string* error) const {
   if (!HasGenericServices(file)) {
     cerr << "No service defined\n";

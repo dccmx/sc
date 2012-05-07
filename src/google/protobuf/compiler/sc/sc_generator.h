@@ -10,15 +10,14 @@ namespace google {
 namespace protobuf {
 
 class FileDescriptor;
-class internal::Mutex;
 
 namespace io { class Printer; }
 
 namespace compiler {
 
-namespace python { class Generator; }
+class OutputDirectory;
 
-class GeneratorContext;
+namespace python { class Generator; }
 
 namespace sc {
 
@@ -31,7 +30,7 @@ class PythonServiceGenerator : public CodeGenerator {
 
   virtual bool Generate(const FileDescriptor* file,
                         const string& parameter,
-                        GeneratorContext* generator_context,
+                        OutputDirectory* generator_context,
                         string* error) const;
 
  private:
@@ -45,7 +44,7 @@ class PythonClientGenerator : public CodeGenerator {
 
   virtual bool Generate(const FileDescriptor* file,
                         const string& parameter,
-                        GeneratorContext* generator_context,
+                        OutputDirectory* generator_context,
                         string* error) const;
 
  private:

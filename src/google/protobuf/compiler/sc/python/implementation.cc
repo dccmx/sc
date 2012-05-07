@@ -39,6 +39,10 @@ void ImplementationGenerator::PrintServices() const {
     const ServiceDescriptor *service = file_->service(i);
     printer_->Print("class $service$(echo_pb2.$service$):\n", "service", service->name());
     for (int j = 0; j < service->method_count(); j++) {
+      map<string, string> m;
+      m["method"] = service->method(j)->name();
+      m["module"] = PythonModuleName(file_->name());
+      m["response"] = service->method(j)->output_type()->name();
       const char method_tpl[] =
           "    def $method$(self, rpc_controller, request, done):\n"
           "        # TODO implement method here to finish the server\n"
@@ -47,10 +51,7 @@ void ImplementationGenerator::PrintServices() const {
           "        #   do some thing to fill the response\n"
           "        #   done(response)\n"
           "        pass";
-      printer_->Print(method_tpl,
-                      "method", service->method(j)->name(),
-                      "module", PythonModuleName(file_->name()),
-                      "response", service->method(j)->output_type()->name());
+      printer_->Print(m, method_tpl);
       if (j != service->method_count() - 1) printer_->Print("\n");
     }
     if (i != file_->service_count() - 1) printer_->Print("\n\n");
