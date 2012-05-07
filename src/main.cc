@@ -113,6 +113,8 @@ int main(int argc, char **argv) {
   proto_argv.push_back(argv[0]);
   proto_argv.push_back(NULL);  // reserve position for type
 
+  if (argc < 5) Usage(argv[0]);
+
   for (int i = 1; i < argc; i++) {
     if (strcmp(argv[i], "--python") == 0 || strcmp(argv[i], "--cpp") == 0) {
       lang = argv[i];
