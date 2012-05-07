@@ -25,11 +25,11 @@ inline bool HasGenericServices(const FileDescriptor *file) {
 
 }  // namespace
 
-PythonServiceGenerator::PythonServiceGenerator() {}
+PythonServerGenerator::PythonServerGenerator() {}
 
-PythonServiceGenerator::~PythonServiceGenerator() {}
+PythonServerGenerator::~PythonServerGenerator() {}
 
-bool PythonServiceGenerator::Generate(const FileDescriptor* file,
+bool PythonServerGenerator::Generate(const FileDescriptor* file,
                       const string& parameter,
                       OutputDirectory* context,
                       string* error) const {

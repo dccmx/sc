@@ -46,10 +46,10 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_sc_OBJECTS = main.$(OBJEXT) sc_helpers.$(OBJEXT) \
-	service_generator.$(OBJEXT) server.$(OBJEXT) \
-	implementation.$(OBJEXT) server_setup.$(OBJEXT) \
+	server_generator.$(OBJEXT) server_main.$(OBJEXT) \
+	server_implementation.$(OBJEXT) server_setup.$(OBJEXT) \
 	client_generator.$(OBJEXT) client_init.$(OBJEXT) \
-	client_setup.$(OBJEXT) clientlib.$(OBJEXT)
+	client_setup.$(OBJEXT) client_lib.$(OBJEXT)
 sc_OBJECTS = $(am_sc_OBJECTS)
 sc_DEPENDENCIES =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
@@ -166,14 +166,14 @@ sc_SOURCES = main.cc \
 			 google/protobuf/compiler/sc/sc_helpers.h \
 			 google/protobuf/compiler/sc/sc_helpers.cc \
 			 google/protobuf/compiler/sc/python/generator.h \
-			 google/protobuf/compiler/sc/python/service_generator.cc \
-			 google/protobuf/compiler/sc/python/server.cc \
-			 google/protobuf/compiler/sc/python/implementation.cc \
+			 google/protobuf/compiler/sc/python/server_generator.cc \
+			 google/protobuf/compiler/sc/python/server_main.cc \
+			 google/protobuf/compiler/sc/python/server_implementation.cc \
 			 google/protobuf/compiler/sc/python/server_setup.cc \
 			 google/protobuf/compiler/sc/python/client_generator.cc \
 			 google/protobuf/compiler/sc/python/client_init.cc \
 			 google/protobuf/compiler/sc/python/client_setup.cc \
-			 google/protobuf/compiler/sc/python/clientlib.cc
+			 google/protobuf/compiler/sc/python/client_lib.cc
 
 sc_LDADD = -lprotoc -lprotobuf -lpthread
 all: all-am
@@ -259,14 +259,14 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/client_generator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/client_init.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/client_lib.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/client_setup.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/clientlib.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/implementation.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sc_helpers.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server_generator.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server_implementation.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server_main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server_setup.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/service_generator.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -296,47 +296,47 @@ sc_helpers.obj: google/protobuf/compiler/sc/sc_helpers.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o sc_helpers.obj `if test -f 'google/protobuf/compiler/sc/sc_helpers.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/sc_helpers.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/sc_helpers.cc'; fi`
 
-service_generator.o: google/protobuf/compiler/sc/python/service_generator.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT service_generator.o -MD -MP -MF $(DEPDIR)/service_generator.Tpo -c -o service_generator.o `test -f 'google/protobuf/compiler/sc/python/service_generator.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/service_generator.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/service_generator.Tpo $(DEPDIR)/service_generator.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/service_generator.cc' object='service_generator.o' libtool=no @AMDEPBACKSLASH@
+server_generator.o: google/protobuf/compiler/sc/python/server_generator.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT server_generator.o -MD -MP -MF $(DEPDIR)/server_generator.Tpo -c -o server_generator.o `test -f 'google/protobuf/compiler/sc/python/server_generator.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/server_generator.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/server_generator.Tpo $(DEPDIR)/server_generator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/server_generator.cc' object='server_generator.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o service_generator.o `test -f 'google/protobuf/compiler/sc/python/service_generator.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/service_generator.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o server_generator.o `test -f 'google/protobuf/compiler/sc/python/server_generator.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/server_generator.cc
 
-service_generator.obj: google/protobuf/compiler/sc/python/service_generator.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT service_generator.obj -MD -MP -MF $(DEPDIR)/service_generator.Tpo -c -o service_generator.obj `if test -f 'google/protobuf/compiler/sc/python/service_generator.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/service_generator.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/service_generator.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/service_generator.Tpo $(DEPDIR)/service_generator.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/service_generator.cc' object='service_generator.obj' libtool=no @AMDEPBACKSLASH@
+server_generator.obj: google/protobuf/compiler/sc/python/server_generator.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT server_generator.obj -MD -MP -MF $(DEPDIR)/server_generator.Tpo -c -o server_generator.obj `if test -f 'google/protobuf/compiler/sc/python/server_generator.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/server_generator.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/server_generator.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/server_generator.Tpo $(DEPDIR)/server_generator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/server_generator.cc' object='server_generator.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o service_generator.obj `if test -f 'google/protobuf/compiler/sc/python/service_generator.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/service_generator.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/service_generator.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o server_generator.obj `if test -f 'google/protobuf/compiler/sc/python/server_generator.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/server_generator.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/server_generator.cc'; fi`
 
-server.o: google/protobuf/compiler/sc/python/server.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT server.o -MD -MP -MF $(DEPDIR)/server.Tpo -c -o server.o `test -f 'google/protobuf/compiler/sc/python/server.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/server.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/server.Tpo $(DEPDIR)/server.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/server.cc' object='server.o' libtool=no @AMDEPBACKSLASH@
+server_main.o: google/protobuf/compiler/sc/python/server_main.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT server_main.o -MD -MP -MF $(DEPDIR)/server_main.Tpo -c -o server_main.o `test -f 'google/protobuf/compiler/sc/python/server_main.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/server_main.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/server_main.Tpo $(DEPDIR)/server_main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/server_main.cc' object='server_main.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o server.o `test -f 'google/protobuf/compiler/sc/python/server.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/server.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o server_main.o `test -f 'google/protobuf/compiler/sc/python/server_main.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/server_main.cc
 
-server.obj: google/protobuf/compiler/sc/python/server.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT server.obj -MD -MP -MF $(DEPDIR)/server.Tpo -c -o server.obj `if test -f 'google/protobuf/compiler/sc/python/server.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/server.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/server.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/server.Tpo $(DEPDIR)/server.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/server.cc' object='server.obj' libtool=no @AMDEPBACKSLASH@
+server_main.obj: google/protobuf/compiler/sc/python/server_main.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT server_main.obj -MD -MP -MF $(DEPDIR)/server_main.Tpo -c -o server_main.obj `if test -f 'google/protobuf/compiler/sc/python/server_main.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/server_main.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/server_main.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/server_main.Tpo $(DEPDIR)/server_main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/server_main.cc' object='server_main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o server.obj `if test -f 'google/protobuf/compiler/sc/python/server.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/server.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/server.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o server_main.obj `if test -f 'google/protobuf/compiler/sc/python/server_main.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/server_main.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/server_main.cc'; fi`
 
-implementation.o: google/protobuf/compiler/sc/python/implementation.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT implementation.o -MD -MP -MF $(DEPDIR)/implementation.Tpo -c -o implementation.o `test -f 'google/protobuf/compiler/sc/python/implementation.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/implementation.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/implementation.Tpo $(DEPDIR)/implementation.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/implementation.cc' object='implementation.o' libtool=no @AMDEPBACKSLASH@
+server_implementation.o: google/protobuf/compiler/sc/python/server_implementation.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT server_implementation.o -MD -MP -MF $(DEPDIR)/server_implementation.Tpo -c -o server_implementation.o `test -f 'google/protobuf/compiler/sc/python/server_implementation.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/server_implementation.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/server_implementation.Tpo $(DEPDIR)/server_implementation.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/server_implementation.cc' object='server_implementation.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o implementation.o `test -f 'google/protobuf/compiler/sc/python/implementation.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/implementation.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o server_implementation.o `test -f 'google/protobuf/compiler/sc/python/server_implementation.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/server_implementation.cc
 
-implementation.obj: google/protobuf/compiler/sc/python/implementation.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT implementation.obj -MD -MP -MF $(DEPDIR)/implementation.Tpo -c -o implementation.obj `if test -f 'google/protobuf/compiler/sc/python/implementation.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/implementation.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/implementation.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/implementation.Tpo $(DEPDIR)/implementation.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/implementation.cc' object='implementation.obj' libtool=no @AMDEPBACKSLASH@
+server_implementation.obj: google/protobuf/compiler/sc/python/server_implementation.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT server_implementation.obj -MD -MP -MF $(DEPDIR)/server_implementation.Tpo -c -o server_implementation.obj `if test -f 'google/protobuf/compiler/sc/python/server_implementation.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/server_implementation.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/server_implementation.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/server_implementation.Tpo $(DEPDIR)/server_implementation.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/server_implementation.cc' object='server_implementation.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o implementation.obj `if test -f 'google/protobuf/compiler/sc/python/implementation.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/implementation.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/implementation.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o server_implementation.obj `if test -f 'google/protobuf/compiler/sc/python/server_implementation.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/server_implementation.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/server_implementation.cc'; fi`
 
 server_setup.o: google/protobuf/compiler/sc/python/server_setup.cc
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT server_setup.o -MD -MP -MF $(DEPDIR)/server_setup.Tpo -c -o server_setup.o `test -f 'google/protobuf/compiler/sc/python/server_setup.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/server_setup.cc
@@ -394,19 +394,19 @@ client_setup.obj: google/protobuf/compiler/sc/python/client_setup.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o client_setup.obj `if test -f 'google/protobuf/compiler/sc/python/client_setup.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/client_setup.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/client_setup.cc'; fi`
 
-clientlib.o: google/protobuf/compiler/sc/python/clientlib.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT clientlib.o -MD -MP -MF $(DEPDIR)/clientlib.Tpo -c -o clientlib.o `test -f 'google/protobuf/compiler/sc/python/clientlib.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/clientlib.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/clientlib.Tpo $(DEPDIR)/clientlib.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/clientlib.cc' object='clientlib.o' libtool=no @AMDEPBACKSLASH@
+client_lib.o: google/protobuf/compiler/sc/python/client_lib.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT client_lib.o -MD -MP -MF $(DEPDIR)/client_lib.Tpo -c -o client_lib.o `test -f 'google/protobuf/compiler/sc/python/client_lib.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/client_lib.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/client_lib.Tpo $(DEPDIR)/client_lib.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/client_lib.cc' object='client_lib.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o clientlib.o `test -f 'google/protobuf/compiler/sc/python/clientlib.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/clientlib.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o client_lib.o `test -f 'google/protobuf/compiler/sc/python/client_lib.cc' || echo '$(srcdir)/'`google/protobuf/compiler/sc/python/client_lib.cc
 
-clientlib.obj: google/protobuf/compiler/sc/python/clientlib.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT clientlib.obj -MD -MP -MF $(DEPDIR)/clientlib.Tpo -c -o clientlib.obj `if test -f 'google/protobuf/compiler/sc/python/clientlib.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/clientlib.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/clientlib.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/clientlib.Tpo $(DEPDIR)/clientlib.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/clientlib.cc' object='clientlib.obj' libtool=no @AMDEPBACKSLASH@
+client_lib.obj: google/protobuf/compiler/sc/python/client_lib.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT client_lib.obj -MD -MP -MF $(DEPDIR)/client_lib.Tpo -c -o client_lib.obj `if test -f 'google/protobuf/compiler/sc/python/client_lib.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/client_lib.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/client_lib.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/client_lib.Tpo $(DEPDIR)/client_lib.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='google/protobuf/compiler/sc/python/client_lib.cc' object='client_lib.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o clientlib.obj `if test -f 'google/protobuf/compiler/sc/python/clientlib.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/clientlib.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/clientlib.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o client_lib.obj `if test -f 'google/protobuf/compiler/sc/python/client_lib.cc'; then $(CYGPATH_W) 'google/protobuf/compiler/sc/python/client_lib.cc'; else $(CYGPATH_W) '$(srcdir)/google/protobuf/compiler/sc/python/client_lib.cc'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

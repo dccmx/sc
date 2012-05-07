@@ -145,7 +145,7 @@ int main(int argc, char **argv) {
   type = lang + "_" + side + "_out=dir=" + package_dir + ":" + package_dir;
   proto_argv[1] = type.c_str();
 
-  google::protobuf::compiler::sc::PythonServiceGenerator python_service_generator;
+  google::protobuf::compiler::sc::PythonServerGenerator python_service_generator;
   cli.RegisterGenerator("--python_server_out", &python_service_generator, "Generate server source files.");
 
   google::protobuf::compiler::sc::PythonClientGenerator python_client_generator;

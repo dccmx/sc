@@ -15,18 +15,16 @@ namespace io { class Printer; }
 
 namespace compiler {
 
-class OutputDirectory;
-
 namespace python { class Generator; }
 
 namespace sc {
 
 using std::string;
 
-class PythonServiceGenerator : public CodeGenerator {
+class PythonServerGenerator : public CodeGenerator {
  public:
-  PythonServiceGenerator();
-  virtual ~PythonServiceGenerator();
+  PythonServerGenerator();
+  virtual ~PythonServerGenerator();
 
   virtual bool Generate(const FileDescriptor* file,
                         const string& parameter,
