@@ -37,7 +37,9 @@ void ImplementationGenerator::PrintImports() const {
 void ImplementationGenerator::PrintServices() const {
   for (int i = 0; i < file_->service_count(); ++i) {
     const ServiceDescriptor *service = file_->service(i);
-    printer_->Print("class $service$(echo_pb2.$service$):\n", "service", service->name());
+    printer_->Print("class $service$($module$.$service$):\n",
+                    "service", service->name(),
+                    "module", PythonModuleName(file_->name()));
     for (int j = 0; j < service->method_count(); j++) {
       map<string, string> m;
       m["method"] = service->method(j)->name();
