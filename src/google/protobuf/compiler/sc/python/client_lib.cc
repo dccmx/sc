@@ -98,7 +98,7 @@ void ClientlibGenerator::PrintChannel() const {
       "\n"
       "    def CallMethod(self, methodDescriptor, rpcController, request, responseClass, done=None):\n"
       "        full_method = methodDescriptor.containing_service.name + '.' + methodDescriptor.name\n"
-      "        data = self._client.call([full_method, request.SerializeToString()])[0]\n"
+      "        data = self._client.call([full_method, request.SerializeToString()]).argv[0]\n"
       "        response = responseClass()\n"
       "        response.ParseFromString(data)\n"
       "        done(response)\n";
