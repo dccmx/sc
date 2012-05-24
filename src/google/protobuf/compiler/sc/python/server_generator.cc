@@ -53,7 +53,7 @@ bool PythonServerGenerator::Generate(const FileDescriptor* file,
 
   string impl_filename = output_dir_ + PythonImplName(file->name()) + ".py";
   
-  if (access(impl_filename.c_str(), F_OK)) {
+  if (!access(impl_filename.c_str(), F_OK)) {
     ImplementationGenerator impl_gen(file);
     scoped_ptr<io::ZeroCopyOutputStream> output(context->Open(PythonImplName(file->name()) + ".py"));
     io::Printer printer(output.get(), '$');
