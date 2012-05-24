@@ -22,9 +22,9 @@ ServerGenerator::~ServerGenerator() {}
 void ServerGenerator::Generate(io::Printer* printer) {
   printer_ = printer;
   PrintImports();
-  PrintArgparse();
   PrintRequestHandler();
   PrintApplication();
+  PrintArgparse();
   PrintMain();
 }
 
@@ -32,7 +32,8 @@ void ServerGenerator::PrintImports() const {
   const char tpl[] =
       "#!/usr/bin/python\n"
       "# coding: utf-8\n"
-      "import argparse\n"
+      "import getopt\n"
+      "import sys\n"
       "import $impl$\n"
       "import sniorfy.rpc\n"
       "import sniorfy.ioloop\n";
@@ -42,9 +43,36 @@ void ServerGenerator::PrintImports() const {
 
 void ServerGenerator::PrintArgparse() const {
   const char tpl[] =
-      "argparser = argparse.ArgumentParser(description='$name$ server', conflict_handler='resolve')\n"
-      "argparser.add_argument('-p', metavar='port', dest='port', type=int, help='port number of $name$ service')\n"
-      "args = argparser.parse_args()\n";
+      "def usage():\n"
+      "    msg = '''usage: %s [options]\n"
+      "\n"
+      "options:\n"
+      "    -p --port    port number\n"
+      "    -h --help    print help message\n"
+      "''' \% sys.argv[0]\n"
+      "\n"
+      "    print(msg)\n"
+      "\n"
+      "\n"
+      "def parse_args():\n"
+      "    arg = {'port': 3300}\n"
+      "    try:\n"
+      "        opts, args = getopt.getopt(sys.argv[1:], 'hp:', ['help', 'port='])\n"
+      "    except getopt.GetoptError, err:\n"
+      "        print(str(err))\n"
+      "        usage()\n"
+      "        sys.exit(2)\n"
+      "    for o, a in opts:\n"
+      "        if o in ('-h', '--help'):\n"
+      "            usage()\n"
+      "            sys.exit()\n"
+      "        elif o in ('-p', '--port'):\n"
+      "            arg['port'] = int(a)\n"
+      "        else:\n"
+      "            print('unkown option: %s' % o)\n"
+      "            sys.exit()\n"
+      "    return arg\n";
+
   printer_->Print(tpl, "name", StripProto(file_->name()));
   printer_->Print("\n\n");
 }
@@ -99,8 +127,9 @@ void ServerGenerator::PrintApplication() const {
 void ServerGenerator::PrintMain() const {
   const char tpl[] =
       "def main():\n"
+      "    args = parse_args()\n"
       "    app = Application(RequestHandler)\n"
-      "    app.listen(args.port)\n"
+      "    app.listen(args['port'])\n"
       "    sniorfy.ioloop.IOLoop.instance().start()\n"
       "\n"
       "\n"
