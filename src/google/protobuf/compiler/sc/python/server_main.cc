@@ -36,7 +36,7 @@ void ServerGenerator::PrintImports() const {
       "import sys\n"
       "import $impl$\n"
       "import sniorfy.rpc\n"
-      "import sniorfy.ioloop\n";
+      "import sniorfy.ioloop.ioloop\n";
   printer_->Print(tpl, "impl", PythonImplName(file_->name()));
   printer_->Print("\n\n");
 }
@@ -102,7 +102,7 @@ void ServerGenerator::PrintRequestHandler() const {
       "                self.response = response\n"
       "        callback = callbackClass()\n"
       "        service.CallMethod(method, controller, request, callback)\n"
-      "        self.addarg(callback.response.SerializeToString())\n";
+      "        self.appendarg(callback.response.SerializeToString())\n";
   const char service_tpl[] =
       "        s = $impl$.$service$()\n"
       "        self._services[s.GetDescriptor().name] = s\n";
@@ -130,7 +130,7 @@ void ServerGenerator::PrintMain() const {
       "    args = parse_args()\n"
       "    app = Application(RequestHandler)\n"
       "    app.listen(args['port'])\n"
-      "    sniorfy.ioloop.IOLoop.instance().start()\n"
+      "    sniorfy.ioloop.ioloop.IOLoop.instance().start()\n"
       "\n"
       "\n"
       "if __name__ == '__main__':\n"
